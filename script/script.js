@@ -1,6 +1,6 @@
 let allIssues = [];
 
-// ১. লগইন ফাংশন
+
 function handleLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
@@ -14,7 +14,7 @@ function handleLogin() {
     }
 }
 
-// ২. সার্ভার থেকে ডাটা ফেচ করা
+
 async function fetchIssues() {
     toggleLoader(true);
     try {
@@ -29,7 +29,7 @@ async function fetchIssues() {
     }
 }
 
-// ৩. ডাটা ডিসপ্লে করা (ইমেজ ও আইকনসহ)
+
 function displayIssues(issues) {
     const container = document.getElementById('issue-container');
     const countText = document.getElementById('issue-count-text');
@@ -37,15 +37,15 @@ function displayIssues(issues) {
     countText.innerText = `${issues.length} Issues`;
 
     issues.forEach(issue => {
-        // স্ট্যাটাস অনুযায়ী টপ বর্ডার কালার
+      
         const borderStyle = issue.status === 'open' ? 'border-t-green-400' : 'border-t-purple-400';
         
-        // প্রায়োরিটি অনুযায়ী কালার সেট
+    
         let prioClass = "bg-gray-100 text-gray-500";
         if (issue.priority?.toLowerCase() === 'high') prioClass = "bg-red-50 text-red-500";
         else if (issue.priority?.toLowerCase() === 'medium') prioClass = "bg-orange-50 text-orange-400";
 
-        // স্ট্যাটাস অনুযায়ী আপনার দেওয়া ইমেজ পাথ
+      
         const statusIcon = issue.status === 'open' 
             ? './Images/Open-Status.png' 
             : './Images/Closed- Status .png'; 
@@ -56,9 +56,9 @@ function displayIssues(issues) {
         
         card.innerHTML = `
             <div class="flex justify-between items-start mb-3">
-                <!-- স্ট্যাটাস ইমেজ -->
-                <div class="w-6 h-6">
-                    <img src="${statusIcon}" class="w-full h-full object-contain" alt="status icon" onerror="this.src='https://via.placeholder.com/24?text=?'">
+            
+       <div class="w-6 h-6">
+         <img src="${statusIcon}" class="w-full h-full object-contain" alt="status icon" onerror="this.src='https://via.placeholder.com/24?text=?'">
                 </div>
                 <span class="${prioClass} text-[10px] font-bold px-2 py-0.5 rounded uppercase">${issue.priority}</span>
             </div>
@@ -67,12 +67,12 @@ function displayIssues(issues) {
             <p class="text-gray-400 text-[11px] mb-4 line-clamp-2">${issue.description}</p>
             
             <div class="flex flex-wrap gap-2 mb-6 mt-auto">
-                <!-- BUG ট্যাগ (ডট ছাড়া) -->
-                <span class="bg-red-50 text-red-500 text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
+              
+                <span class="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1">
                    <i class="fa-solid fa-bug"></i> BUG
                 </span>
-                <!-- HELP WANTED ট্যাগ -->
-                <span class="bg-orange-50 text-orange-400 text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
+
+                <span class="bg-orange-50 text-orange-400 text-[10px]  font-bold px-2 py-1 rounded flex items-center gap-1">
                    <i class="fa-solid fa-circle-info"></i> HELP WANTED
                 </span>
             </div>
@@ -86,7 +86,7 @@ function displayIssues(issues) {
     });
 }
 
-// ৪. ফিল্টার ফাংশন
+
 function filterIssues(status) {
     const buttons = ['tab-all', 'tab-open', 'tab-closed'];
     buttons.forEach(id => document.getElementById(id).classList.remove('active-tab-btn'));
@@ -104,7 +104,10 @@ function filterIssues(status) {
     }, 400); 
 }
 
-// ৫. সার্চ ফাংশন
+
+
+
+
 async function handleSearch(type) {
     const inputId = type === 'desktop' ? 'search-input' : 'search-input-mobile';
     const query = document.getElementById(inputId).value;
@@ -120,7 +123,6 @@ async function handleSearch(type) {
     displayIssues(data.data);
 }
 
-// ৬. মডাল ডিটেইলস
 async function showDetails(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
@@ -144,7 +146,7 @@ async function showDetails(id) {
     document.getElementById('modal').classList.remove('hidden');
 }
 
-// ৭. ইউটিলিটি ফাংশন
+
 function closeModal() { 
     document.getElementById('modal').classList.add('hidden'); 
 }
