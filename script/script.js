@@ -139,9 +139,7 @@ async function showDetails(id) {
             <div><p class="text-xs text-gray-400 mb-1 font-bold">Assignee</p><p class="font-semibold text-gray-700">${issue.author}</p></div>
             <div><p class="text-xs text-gray-400 mb-1 font-bold">Priority</p><span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">${issue.priority}</span></div>
         </div>
-        <div class="mt-8 text-right">
-            <button onclick="closeModal()" class="bg-gray-100 text-gray-600 px-6 py-2 rounded-md font-medium hover:bg-gray-200 transition-colors">Close</button>
-        </div>
+        
     `;
     document.getElementById('modal').classList.remove('hidden');
 }
